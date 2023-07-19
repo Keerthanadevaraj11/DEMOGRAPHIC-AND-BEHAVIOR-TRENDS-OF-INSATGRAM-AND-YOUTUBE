@@ -1,0 +1,128 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 80%;
+            height: 750px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "indiatoday", "label": "indiatoday", "shape": "dot", "title": "indiatoday \u003cbr\u003eBetweenness Centrality: 0.1497\u003cbr\u003eDegree Centrality: 0.2692\u003cbr\u003e Closeness Centrality: 0.2543", "value": 1400}, {"font": {"color": "white"}, "id": "narendramodi", "label": "narendramodi", "shape": "dot", "title": "narendramodi \u003cbr\u003eBetweenness Centrality: 0.0441\u003cbr\u003eDegree Centrality: 0.0385\u003cbr\u003e Closeness Centrality: 0.2312", "value": 200}, {"font": {"color": "white"}, "id": "aliaabhatt", "label": "aliaabhatt", "shape": "dot", "title": "aliaabhatt \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "ranveersingh", "label": "ranveersingh", "shape": "dot", "title": "ranveersingh \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "nabilajamal_", "label": "nabilajamal_", "shape": "dot", "title": "nabilajamal_ \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "kritisanon", "label": "kritisanon", "shape": "dot", "title": "kritisanon \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "nupursanon", "label": "nupursanon", "shape": "dot", "title": "nupursanon \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "priyankachopra", "label": "priyankachopra", "shape": "dot", "title": "priyankachopra \u003cbr\u003eBetweenness Centrality: 0.0441\u003cbr\u003eDegree Centrality: 0.0385\u003cbr\u003e Closeness Centrality: 0.2312", "value": 200}, {"font": {"color": "white"}, "id": "dipali.patel_official", "label": "dipali.patel_official", "shape": "dot", "title": "dipali.patel_official \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "sakshibatra18", "label": "sakshibatra18", "shape": "dot", "title": "sakshibatra18 \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "mahi7781", "label": "mahi7781", "shape": "dot", "title": "mahi7781 \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "aajtak", "label": "aajtak", "shape": "dot", "title": "aajtak \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "sneha.mordani", "label": "sneha.mordani", "shape": "dot", "title": "sneha.mordani \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "deepikapadukone", "label": "deepikapadukone", "shape": "dot", "title": "deepikapadukone \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "virat.kohli", "label": "virat.kohli", "shape": "dot", "title": "virat.kohli \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1641", "value": 100}, {"font": {"color": "white"}, "id": "cnn", "label": "cnn", "shape": "dot", "title": "cnn \u003cbr\u003eBetweenness Centrality: 0.0008\u003cbr\u003eDegree Centrality: 0.0385\u003cbr\u003e Closeness Centrality: 0.0385", "value": 200}, {"font": {"color": "white"}, "id": "cnnpolitics", "label": "cnnpolitics", "shape": "dot", "title": "cnnpolitics \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0256", "value": 100}, {"font": {"color": "white"}, "id": "kaitlancollins", "label": "kaitlancollins", "shape": "dot", "title": "kaitlancollins \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0256", "value": 100}, {"font": {"color": "white"}, "id": "wionews", "label": "wionews", "shape": "dot", "title": "wionews \u003cbr\u003eBetweenness Centrality: 0.1120\u003cbr\u003eDegree Centrality: 0.1923\u003cbr\u003e Closeness Centrality: 0.2119", "value": 1000}, {"font": {"color": "white"}, "id": "sneha_swaminathann", "label": "sneha_swaminathann", "shape": "dot", "title": "sneha_swaminathann \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "erik.njoka", "label": "erik.njoka", "shape": "dot", "title": "erik.njoka \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "b_torg", "label": "b_torg", "shape": "dot", "title": "b_torg \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "moohita", "label": "moohita", "shape": "dot", "title": "moohita \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "emmanuelmacron", "label": "emmanuelmacron", "shape": "dot", "title": "emmanuelmacron \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "tutejankit", "label": "tutejankit", "shape": "dot", "title": "tutejankit \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "mollygambhir", "label": "mollygambhir", "shape": "dot", "title": "mollygambhir \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "mukuljrsharma_", "label": "mukuljrsharma_", "shape": "dot", "title": "mukuljrsharma_ \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1453", "value": 100}, {"font": {"color": "white"}, "id": "bbcnews", "label": "bbcnews", "shape": "dot", "title": "bbcnews \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0577\u003cbr\u003e Closeness Centrality: 0.0192", "value": 300}, {"font": {"color": "white"}, "id": "bbcnewsuk", "label": "bbcnewsuk", "shape": "dot", "title": "bbcnewsuk \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0192", "value": 100}, {"font": {"color": "white"}, "id": "ndtv", "label": "ndtv", "shape": "dot", "title": "ndtv \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0192", "value": 100}, {"font": {"color": "white"}, "id": "usha_int", "label": "usha_int", "shape": "dot", "title": "usha_int \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0192", "value": 100}, {"font": {"color": "white"}, "id": "timesnow", "label": "timesnow", "shape": "dot", "title": "timesnow \u003cbr\u003eBetweenness Centrality: 0.0023\u003cbr\u003eDegree Centrality: 0.0962\u003cbr\u003e Closeness Centrality: 0.0577", "value": 500}, {"font": {"color": "white"}, "id": "padmajajoshi1311", "label": "padmajajoshi1311", "shape": "dot", "title": "padmajajoshi1311 \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0346", "value": 100}, {"font": {"color": "white"}, "id": "madhavgk", "label": "madhavgk", "shape": "dot", "title": "madhavgk \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0346", "value": 100}, {"font": {"color": "white"}, "id": "navikakumar", "label": "navikakumar", "shape": "dot", "title": "navikakumar \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0346", "value": 100}, {"font": {"color": "white"}, "id": "euronews.tv", "label": "euronews.tv", "shape": "dot", "title": "euronews.tv \u003cbr\u003eBetweenness Centrality: 0.0415\u003cbr\u003eDegree Centrality: 0.2500\u003cbr\u003e Closeness Centrality: 0.2115", "value": 1300}, {"font": {"color": "white"}, "id": "eu_growth", "label": "eu_growth", "shape": "dot", "title": "eu_growth \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "jambinot", "label": "jambinot", "shape": "dot", "title": "jambinot \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "euronewsgreen", "label": "euronewsgreen", "shape": "dot", "title": "euronewsgreen \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "europeancommission", "label": "europeancommission", "shape": "dot", "title": "europeancommission \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "euronewsnext", "label": "euronewsnext", "shape": "dot", "title": "euronewsnext \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "nocomment_euronews", "label": "nocomment_euronews", "shape": "dot", "title": "nocomment_euronews \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "tahmid.chowdhury", "label": "tahmid.chowdhury", "shape": "dot", "title": "tahmid.chowdhury \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "cisl_cambridge", "label": "cisl_cambridge", "shape": "dot", "title": "cisl_cambridge \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "cepaorg", "label": "cepaorg", "shape": "dot", "title": "cepaorg \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "europeanparliament", "label": "europeanparliament", "shape": "dot", "title": "europeanparliament \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "euinmyregion", "label": "euinmyregion", "shape": "dot", "title": "euinmyregion \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.1108", "value": 100}, {"font": {"color": "white"}, "id": "dailymail", "label": "dailymail", "shape": "dot", "title": "dailymail \u003cbr\u003eBetweenness Centrality: 0.0075\u003cbr\u003eDegree Centrality: 0.1346\u003cbr\u003e Closeness Centrality: 0.0962", "value": 700}, {"font": {"color": "white"}, "id": "damianterriquez", "label": "damianterriquez", "shape": "dot", "title": "damianterriquez \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0534", "value": 100}, {"font": {"color": "white"}, "id": "youmagazine", "label": "youmagazine", "shape": "dot", "title": "youmagazine \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0534", "value": 100}, {"font": {"color": "white"}, "id": "thestylistandthewardrobe", "label": "thestylistandthewardrobe", "shape": "dot", "title": "thestylistandthewardrobe \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0534", "value": 100}, {"font": {"color": "white"}, "id": "borisjohnsonuk", "label": "borisjohnsonuk", "shape": "dot", "title": "borisjohnsonuk \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0534", "value": 100}, {"font": {"color": "white"}, "id": "psychforsoreminds", "label": "psychforsoreminds", "shape": "dot", "title": "psychforsoreminds \u003cbr\u003eBetweenness Centrality: 0.0000\u003cbr\u003eDegree Centrality: 0.0192\u003cbr\u003e Closeness Centrality: 0.0534", "value": 100}]);
+        edges = new vis.DataSet([{"from": "indiatoday", "to": "narendramodi"}, {"from": "indiatoday", "to": "aliaabhatt"}, {"from": "indiatoday", "to": "ranveersingh"}, {"from": "indiatoday", "to": "nabilajamal_"}, {"from": "indiatoday", "to": "kritisanon"}, {"from": "indiatoday", "to": "nupursanon"}, {"from": "indiatoday", "to": "priyankachopra"}, {"from": "indiatoday", "to": "dipali.patel_official"}, {"from": "indiatoday", "to": "sakshibatra18"}, {"from": "indiatoday", "to": "mahi7781"}, {"from": "indiatoday", "to": "aajtak"}, {"from": "indiatoday", "to": "sneha.mordani"}, {"from": "indiatoday", "to": "deepikapadukone"}, {"from": "indiatoday", "to": "virat.kohli"}, {"from": "cnn", "to": "cnnpolitics"}, {"from": "cnn", "to": "kaitlancollins"}, {"from": "wionews", "to": "sneha_swaminathann"}, {"from": "wionews", "to": "erik.njoka"}, {"from": "wionews", "to": "priyankachopra"}, {"from": "wionews", "to": "b_torg"}, {"from": "wionews", "to": "moohita"}, {"from": "wionews", "to": "narendramodi"}, {"from": "wionews", "to": "emmanuelmacron"}, {"from": "wionews", "to": "tutejankit"}, {"from": "wionews", "to": "mollygambhir"}, {"from": "wionews", "to": "mukuljrsharma_"}, {"from": "bbcnews", "to": "bbcnewsuk"}, {"from": "bbcnews", "to": "bbcnews"}, {"from": "ndtv", "to": "usha_int"}, {"from": "timesnow", "to": "padmajajoshi1311"}, {"from": "timesnow", "to": "madhavgk"}, {"from": "timesnow", "to": "navikakumar"}, {"from": "timesnow", "to": "timesnow"}, {"from": "euronews.tv", "to": "euronews.tv"}, {"from": "euronews.tv", "to": "eu_growth"}, {"from": "euronews.tv", "to": "jambinot"}, {"from": "euronews.tv", "to": "euronewsgreen"}, {"from": "euronews.tv", "to": "europeancommission"}, {"from": "euronews.tv", "to": "euronewsnext"}, {"from": "euronews.tv", "to": "nocomment_euronews"}, {"from": "euronews.tv", "to": "tahmid.chowdhury"}, {"from": "euronews.tv", "to": "cisl_cambridge"}, {"from": "euronews.tv", "to": "cepaorg"}, {"from": "euronews.tv", "to": "europeanparliament"}, {"from": "euronews.tv", "to": "euinmyregion"}, {"from": "dailymail", "to": "damianterriquez"}, {"from": "dailymail", "to": "youmagazine"}, {"from": "dailymail", "to": "thestylistandthewardrobe"}, {"from": "dailymail", "to": "dailymail"}, {"from": "dailymail", "to": "borisjohnsonuk"}, {"from": "dailymail", "to": "psychforsoreminds"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
